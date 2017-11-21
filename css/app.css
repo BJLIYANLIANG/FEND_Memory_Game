@@ -81,6 +81,13 @@ h1 {
     font-size: 33px;
 }
 
+.deck .card.error {
+    cursor: default;
+    background: red;
+    font-size: 33px;
+}
+
+
 /*
  * Styles for the Score Panel
  */
@@ -107,3 +114,63 @@ h1 {
     float: right;
     cursor: pointer;
 }
+
+/* 胜利部分的样式表 开始 */
+#game-success {
+    width: 100%;
+    min-width: 200px;
+    height: 100%;
+    min-height: 150px;
+    transition: 0.5s;
+    display: none;
+}
+
+#game-success.fullScreen {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    top: 0;
+    bottom: 0;
+    z-index: 2000;
+    opacity: 1;
+    background-color: #fff;
+    padding: 40px;
+    margin: auto;
+}
+
+#game-success .fa-check {
+    color: #01B500;
+    border: 5px solid #afc4a4;
+    padding: 30px;
+    border-radius: 50%;
+    cursor: default;
+}
+
+#game-success .body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#play-again {
+    color: #fff;
+    width: 150px;
+    height: 50px;
+    line-height: 50px;
+    overflow: hidden;
+    text-align: center;
+    vertical-align: middle; 
+    background-color: #01B500;
+    border-radius: 4px;
+    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+    cursor: pointer;
+}
+
+#play-again:hover {
+    box-shadow: 0 8px 6px -6px rgba(46, 61, 73, 0.5);
+}
+
+/* 胜利部分的样式表 结束 */

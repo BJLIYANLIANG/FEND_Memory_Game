@@ -17,15 +17,15 @@
 
         <section class="score-panel">
         	<ul class="stars">
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
+        		<i class="fa fa-star"></i>
+        		<i class="fa fa-star-half-o"></i>
+        		<i class="fa fa-star-o"></i>
         	</ul>
 
         	<span class="moves">3</span> Moves
 
             <div class="restart">
-        		<i class="fa fa-repeat"></i>
+        		<i class="fa fa-repeat" onclick="location.reload(true);"></i>
         	</div>
         </section>
 
@@ -36,7 +36,7 @@
             <li class="card">
                 <i class="fa fa-paper-plane-o"></i>
             </li>
-            <li class="card match">
+            <li class="card">
                 <i class="fa fa-anchor"></i>
             </li>
             <li class="card">
@@ -45,7 +45,7 @@
             <li class="card">
                 <i class="fa fa-cube"></i>
             </li>
-            <li class="card match">
+            <li class="card">
                 <i class="fa fa-anchor"></i>
             </li>
             <li class="card">
@@ -66,7 +66,7 @@
             <li class="card">
                 <i class="fa fa-bomb"></i>
             </li>
-            <li class="card open show">
+            <li class="card">
                 <i class="fa fa-bolt"></i>
             </li>
             <li class="card">
@@ -80,6 +80,16 @@
             </li>
         </ul>
     </div>
+
+    <!-- 游戏胜利 -->
+    <div id="game-success">
+        <div class="body">
+            <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+            <h1>Congratualtions you Won!</h1>
+            <p class="success-sub-msg">With #{move} moves and #{stars} stars.</p>
+            <span id="play-again" onclick="location.reload(true);">Play Again</span>
+        </div>
+    </div> <!-- end of Success modal windows -->
 
     <script src="js/app.js"></script>
 </body>
