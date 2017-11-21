@@ -1,20 +1,20 @@
-# Memory Game Project
+# 记忆游戏项目
 
-## Table of Contents
+## 目录
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+* [说明](#说明)
+* [特约](#特约)
 
-## Instructions
+## 说明
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+开始项目有一些HTML和CSS样式来显示Memory Game项目的静态版本。 您需要将此项目从静态项目转换为交互式项目。 这将需要修改HTML和CSS文件，但主要是JavaScript文件。
 
-To get started, open `js/app.js` and start building out the app's functionality
+要开始，请打开 `js/app.js` 并开始构建应用程序的功能
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+有关具体的详细说明，请查看 [Udacity Classroom](https://classroom.udacity.com/me)中的项目说明。
 
-## Contributing
+## 特约
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+这个仓库是所有学生的入门代码。 因此，我们很可能不会接受拉请求。
 
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+有关详细信息，请查看 [CONTRIBUTING.md](CONTRIBUTING.md)。
