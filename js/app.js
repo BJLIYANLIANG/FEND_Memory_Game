@@ -5,18 +5,17 @@ const cardsHtmlElem = $('.card');
 
 const ICONS = [ 'fa-diamond', 'fa-paper-plane-o', 'fa-bank', 'fa-bolt',
                 'fa-cube', 'fa-anchor', 'fa-leaf', 'fa-bicycle'];
-const ICONSx2 = [...ICONS, ...ICONS];
+const ICONS_DOUBLE  = [...ICONS, ...ICONS];
 
 const STATE = {HIDE: 0, SHOW: 1, MATCH: 2, ERROR: 3, }; 
 
-/*
+/**
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
+ * @param {*} array, the array need to be shuffled
  */
-
-// Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -33,11 +32,11 @@ function shuffle(array) {
 
 /**
  * class Card code 
- * @param {*} index 
- * @param {*} htmlElem 
- * @param {*} icon 
+ * @param {*} index : the index of the crad
+ * @param {*} htmlElem : the real jquery html of the card
+ * @param {*} icon : the icon in fa 
+ * @param {*} status : the 4 status of the crad
  */
-
 let Card = function(index, htmlElem, icon) {
     this.index = index;
     this.htmlElem = htmlElem;
@@ -52,22 +51,22 @@ Card.prototype.init = function() {
 };
 
 Card.prototype.show = function() {
-    this.htmlElem.attr('class', 'card open show');
+    this.htmlElem.attr('class', 'card open show animated flipInY');
     this.status = STATE.SHOW;
 };
 
 Card.prototype.hide = function() {
-    this.htmlElem.attr('class', 'card');
+    this.htmlElem.attr('class', 'card ');
     this.status = STATE.HIDE;
 };
 
 Card.prototype.error = function() {
-    this.htmlElem.attr('class', 'card error');
+    this.htmlElem.attr('class', 'card error animated wobble');
     this.status = STATE.ERROR;
 }
 
 Card.prototype.markAsMatch = function() {
-    this.htmlElem.attr('class', 'card match show');
+    this.htmlElem.attr('class', 'card match show animated rubberBand');
     this.status = STATE.MATCH;
 };
 
@@ -85,16 +84,27 @@ let cards;
 let lastClickIndex;
 let moveCounter;
 let stars;
+let secondForGame;
+let intervalTimer;
 
+/**
+ * startGame() is called when game started
+ */
 function startGame() {
     cards = [];
     lastClickIndex = -1;
     moveCounter = 0;
     stars = 3;
+    secondForGame = 0;
     showMoveCounter();
 
-    //let card_icons = shuffle(ICONSx2)
-    let card_icons = ICONSx2;
+    intervalTimer = window.setInterval(function() {
+        $('.seconds').text(secondForGame);
+        secondForGame ++;
+    }, 1000);
+
+    let card_icons = shuffle(ICONS_DOUBLE);
+    //let card_icons = ICONS_DOUBLE ;
     const cardCount = card_icons.length;   
     
     for (let i = 0; i < cardCount; i ++) {
@@ -108,6 +118,10 @@ function startGame() {
     }
 };
 
+/**
+ * This function is triggered when the card is clicked
+ * @param {*} card : the card which is triggered
+ */
 function cardClickEvent(card){
     console.log("clicked " + card.index);
     if (card.status == STATE.HIDE) {
@@ -116,9 +130,12 @@ function cardClickEvent(card){
     }
 };
 
+/**
+ * the function is for changing the move counter and the stars in the game
+ */
 function showMoveCounter() {
     $('.moves').text(moveCounter);
-    starsHtmlElem = $('.stars').first().children('i');    
+    starsHtmlElem = $('.stars').children('i');    
     if (moveCounter < 16) {
         stars = 3;
         starsHtmlElem.eq(0).attr("class", "fa fa-star");
@@ -157,6 +174,10 @@ function showMoveCounter() {
     }
 };
 
+/**
+ * the function is checked for whether the two card is match,  
+ * @param {*} card : the card which is triggered
+ */
 function checkMatching(card) {
     if (lastClickIndex == -1) {
         lastClickIndex = card.index;
@@ -167,7 +188,7 @@ function checkMatching(card) {
             // no match
             card.error();
             cards[lastClickIndex].error();
-            setTimeout(gotoHide, 300, card, cards[lastClickIndex]);
+            setTimeout(gotoHide, 1000, card, cards[lastClickIndex]);
         } else {
             // match
             card.markAsMatch();
@@ -178,21 +199,32 @@ function checkMatching(card) {
     }
 };
 
+/**
+ * the function is let two card goto hide state, because they are not match.
+ * @param {*} card : the card which is triggered at this time.
+ * @param {*} oldCard : the card which is triggered at last time.
+ */
 function gotoHide(card, oldCard) {
     card.hide();
     oldCard.hide();
 };
 
+/**
+ * the function is check whether the game is success. 
+ * if successed, show congratualtions window
+ */
 function checkGameCompletetion() {
     for(let card of cards) {
 		if(card.status != STATE.MATCH) {
 			return;
 		}
     }
+    clearInterval(intervalTimer);
 
     let msg = $('.success-sub-msg');
-	msg.text(msg.text().replace('#{move}', moveCounter).replace(
-        '#{stars}', stars));
+    msg.text(msg.text().replace('#{move}', moveCounter)
+        .replace('#{stars}', stars)
+        .replace('#{seconds}', secondForGame));
 	$('#game-success').addClass("fullScreen");
 }
 

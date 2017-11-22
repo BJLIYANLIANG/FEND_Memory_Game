@@ -7,6 +7,7 @@
     <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
     <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/animate.css">
 </head>
 <body>
 
@@ -22,10 +23,13 @@
         		<i class="fa fa-star-o"></i>
         	</ul>
 
-        	<span class="moves">3</span> Moves
+            <span class="moves">3</span> Moves
 
+            <i class="fa fa-clock-o"></i>
+            <span class="seconds">0</span> Seconds
+            
             <div class="restart">
-        		<i class="fa fa-repeat" onclick="location.reload(true);"></i>
+                <i class="fa fa-repeat" onclick="location.reload(true);"></i> 
         	</div>
         </section>
 
@@ -86,7 +90,7 @@
         <div class="body">
             <i class="fa fa-check fa-2x" aria-hidden="true"></i>
             <h1>Congratualtions you Won!</h1>
-            <p class="success-sub-msg">With #{move} moves and #{stars} stars.</p>
+            <p class="success-sub-msg">With #{move} moves and #{stars} stars in total #{seconds} seconds.</p>
             <span id="play-again" onclick="location.reload(true);">Play Again</span>
         </div>
     </div> <!-- end of Success modal windows -->
