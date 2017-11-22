@@ -1,7 +1,7 @@
 /*
  * Create a list that holds all of your cards
  */
-const cardsHtmlElem = document.getElementsByClassName('card');
+const cardsHtmlElem = $('.card');
 
 const ICONS = [ 'fa-diamond', 'fa-paper-plane-o', 'fa-bank', 'fa-bolt',
                 'fa-cube', 'fa-anchor', 'fa-leaf', 'fa-bicycle'];
@@ -47,27 +47,27 @@ let Card = function(index, htmlElem, icon) {
 
 Card.prototype.init = function() {
     this.htmlElem.id = this.index;
-    this.htmlElem.className = 'card';
-    this.htmlElem.getElementsByTagName('i')[0].className = `fa ${this.icon}`;
+    this.htmlElem.attr('class', 'card');
+    this.htmlElem.find('i').attr('class',`fa ${this.icon}`);
 };
 
 Card.prototype.show = function() {
-    this.htmlElem.className = 'card open show';
+    this.htmlElem.attr('class', 'card open show');
     this.status = STATE.SHOW;
 };
 
 Card.prototype.hide = function() {
-    this.htmlElem.className = 'card';
+    this.htmlElem.attr('class', 'card');
     this.status = STATE.HIDE;
 };
 
 Card.prototype.error = function() {
-    this.htmlElem.className = 'card error';
+    this.htmlElem.attr('class', 'card error');
     this.status = STATE.ERROR;
 }
 
 Card.prototype.markAsMatch = function() {
-    this.htmlElem.className = 'card match show';
+    this.htmlElem.attr('class', 'card match show');
     this.status = STATE.MATCH;
 };
 
@@ -93,16 +93,16 @@ function startGame() {
     stars = 3;
     showMoveCounter();
 
-    let card_icons = shuffle(ICONSx2)
-    // let card_icons = ICONSx2;
+    //let card_icons = shuffle(ICONSx2)
+    let card_icons = ICONSx2;
     const cardCount = card_icons.length;   
     
     for (let i = 0; i < cardCount; i ++) {
-        let card = new Card(i, cardsHtmlElem[i], card_icons[i]);
+        let card = new Card(i, cardsHtmlElem.eq(i), card_icons[i]);
         card.init();
         cards.push(card);
-        //console.log( card.htmlElem.className);
-        card.htmlElem.addEventListener('click', function(event) {
+        //card.htmlElem.addEventListener('click', function(event) {
+        card.htmlElem.on('click', function(event) {
             cardClickEvent(card)
         });   
     }
@@ -117,43 +117,43 @@ function cardClickEvent(card){
 };
 
 function showMoveCounter() {
-    document.getElementsByClassName('moves')[0].innerHTML = moveCounter;
-    starsHtmlElem = document.getElementsByClassName('stars')[0].getElementsByTagName('i');    
+    $('.moves').text(moveCounter);
+    starsHtmlElem = $('.stars').first().children('i');    
     if (moveCounter < 16) {
         stars = 3;
-        starsHtmlElem[0].className = "fa fa-star";
-        starsHtmlElem[1].className = "fa fa-star";
-        starsHtmlElem[2].className = "fa fa-star";
+        starsHtmlElem.eq(0).attr("class", "fa fa-star");
+        starsHtmlElem.eq(1).attr("class", "fa fa-star");
+        starsHtmlElem.eq(2).attr("class", "fa fa-star");
     } else if (moveCounter < 25) {
         stars = 2.5;
-        starsHtmlElem[0].className = "fa fa-star";
-        starsHtmlElem[1].className = "fa fa-star";
-        starsHtmlElem[2].className = "fa fa-star-half-o";
+        starsHtmlElem.eq(0).attr("class", "fa fa-star");
+        starsHtmlElem.eq(1).attr("class", "fa fa-star");
+        starsHtmlElem.eq(2).attr("class", "fa fa-star-half-o");
     } else if (moveCounter < 30) {
         stars = 2;
-        starsHtmlElem[0].className = "fa fa-star";
-        starsHtmlElem[1].className = "fa fa-star";
-        starsHtmlElem[2].className = "fa fa-star-o";
+        starsHtmlElem.eq(0).attr("class", "fa fa-star");
+        starsHtmlElem.eq(1).attr("class", "fa fa-star");
+        starsHtmlElem.eq(2).attr("class", "fa fa-star-o");
     } else if (moveCounter < 40) {
         stars = 1.5;
-        starsHtmlElem[0].className = "fa fa-star";
-        starsHtmlElem[1].className = "fa fa-star-half-o";
-        starsHtmlElem[2].className = "fa fa-star-o";
+        starsHtmlElem.eq(0).attr("class", "fa fa-star");
+        starsHtmlElem.eq(1).attr("class", "fa fa-star-half-o");
+        starsHtmlElem.eq(2).attr("class", "fa fa-star-o");
     } else if (moveCounter < 50) {
         stars = 1;
-        starsHtmlElem[0].className = "fa fa-star";
-        starsHtmlElem[1].className = "fa fa-star-o";
-        starsHtmlElem[2].className = "fa fa-star-o";
+        starsHtmlElem.eq(0).attr("class", "fa fa-star");
+        starsHtmlElem.eq(1).attr("class", "fa fa-star-o");
+        starsHtmlElem.eq(2).attr("class", "fa fa-star-o");
     } else if (moveCounter < 60) {
         stars = 0.5;
-        starsHtmlElem[0].className = "fa fa-star-half-o";
-        starsHtmlElem[1].className = "fa fa-star-o";
-        starsHtmlElem[2].className = "fa fa-star-o";
+        starsHtmlElem.eq(0).attr("class", "fa fa-star-half-o");
+        starsHtmlElem.eq(1).attr("class", "fa fa-star-o");
+        starsHtmlElem.eq(2).attr("class", "fa fa-star-o");
     } else {
         stars = 0;
-        starsHtmlElem[0].className = "fa fa-star-o";
-        starsHtmlElem[1].className = "fa fa-star-o";
-        starsHtmlElem[2].className = "fa fa-star-o";
+        starsHtmlElem.eq(0).attr("class", "fa fa-star-o");
+        starsHtmlElem.eq(1).attr("class", "fa fa-star-o");
+        starsHtmlElem.eq(2).attr("class", "fa fa-star-o");
     }
 };
 
@@ -188,15 +188,14 @@ function checkGameCompletetion() {
 		if(card.status != STATE.MATCH) {
 			return;
 		}
-	}
+    }
 
-	let msg = document.getElementsByClassName('success-sub-msg')[0];
-	msg.innerHTML = msg.innerHTML.replace('#{move}', moveCounter).replace(
-		'#{stars}', stars);
-
-	document.getElementById('game-success').className = "fullScreen";
+    let msg = $('.success-sub-msg');
+	msg.text(msg.text().replace('#{move}', moveCounter).replace(
+        '#{stars}', stars));
+	$('#game-success').addClass("fullScreen");
 }
 
-document.addEventListener('DOMContentLoaded',function(){
+$(function(){
 	startGame();
 });
